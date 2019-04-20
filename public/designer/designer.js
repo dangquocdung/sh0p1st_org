@@ -850,37 +850,37 @@ designer.function = {
                 cornerPadding: 7
       },
       tl: {
-        icon: $('#hf_base_url').val() + '/designer/icons/rotate.png'
+        icon: $('#hf_base_url').val() + '/public/designer/icons/rotate.png'
       },
       br: {
-        icon: $('#hf_base_url').val() + '/designer/icons/resize.png'
+        icon: $('#hf_base_url').val() + '/public/designer/icons/resize.png'
       },
       bl: {
-        icon: $('#hf_base_url').val() + '/designer/icons/remove.png'
+        icon: $('#hf_base_url').val() + '/public/designer/icons/remove.png'
       },
       ml: {
-        icon: $('#hf_base_url').val() + '/designer/icons/dot.png',
+        icon: $('#hf_base_url').val() + '/public/designer/icons/dot.png',
         settings: {
           cornerPadding: 10,
           cornerSize: 20,
         }
       },
       mr: {
-        icon: $('#hf_base_url').val() + '/designer/icons/dot.png',
+        icon: $('#hf_base_url').val() + '/public/designer/icons/dot.png',
         settings: {
           cornerPadding: 1,
           cornerSize: 2,
         }
       },
       mb: {
-        icon: $('#hf_base_url').val() + '/designer/icons/dot.png',
+        icon: $('#hf_base_url').val() + '/public/designer/icons/dot.png',
         settings: {
           cornerPadding: 10,
           cornerSize: 20,
         }
       },
       mt: {
-        icon: $('#hf_base_url').val() + '/designer/icons/dot.png',
+        icon: $('#hf_base_url').val() + '/public/designer/icons/dot.png',
         settings: {
           cornerPadding: 10,
           cornerSize: 20,

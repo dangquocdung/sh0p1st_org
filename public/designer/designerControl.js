@@ -80,14 +80,14 @@ designerControl.onPageLoad =
               swal(localizationString.good_job, localizationString.image_upload_success, "success");
               
               if($('.recently-uploaded-images').find('.recent-images-items').length>0){
-                $('.recently-uploaded-images').find('.recent-images-items:last').after('<div class="recent-images-items"><img src="'+ $('#hf_base_url').val() +'/uploads/'+ responseText.img_name +'"></div>');
+                $('.recently-uploaded-images').find('.recent-images-items:last').after('<div class="recent-images-items"><img src="'+ $('#hf_base_url').val() +'/public/uploads/'+ responseText.img_name +'"></div>');
               }
               else{
                 if($('.no-available-msg').length>0){
                   $('.no-available-msg').remove();
                 }
                 
-                $('.recently-uploaded-images').append('<div class="recent-images-items"><img src="'+ $('#hf_base_url').val() +'/uploads/'+ responseText.img_name +'"></div><div class="clear_both"></div>');
+                $('.recently-uploaded-images').append('<div class="recent-images-items"><img src="'+ $('#hf_base_url').val() +'/public/uploads/'+ responseText.img_name +'"></div><div class="clear_both"></div>');
               }
               
               designerControl.event._gallery_img_add_at_canvas();

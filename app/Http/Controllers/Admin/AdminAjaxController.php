@@ -1249,7 +1249,7 @@ class AdminAjaxController extends Controller
         elseif($input['data']['track'] == 'manage_languages'){
 					$classGetFunction  =  new GetFunction();
           $destinationPath =  base_path('resources/lang/');
-          $upload_folder   =  base_path('uploads/');
+          $upload_folder   =  base_path('public/uploads/');
       
           $get_lang_data_by_id   =  ManageLanguage::where(['id' => $input['data']['id']])->get()->toArray();
           $get_data              =  array_shift($get_lang_data_by_id);
@@ -2597,7 +2597,7 @@ class AdminAjaxController extends Controller
                     $decodedImageData = base64_decode( str_replace( 'data:image/png;base64,', '', $attribNode->value ) );
                     
                     if( file_put_contents( public_path('uploads/'. $img_name. ".png" ), $decodedImageData ) ){
-                      $img_url = url('/').'/uploads/'. $img_name. ".png";
+                      $img_url = url('/').'/public/uploads/'. $img_name. ".png";
                     }
                   } else {
                     $img_url = $attribNode->value;

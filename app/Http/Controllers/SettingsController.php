@@ -459,7 +459,7 @@ class SettingsController extends Controller
       $input  = Input::all();
       $zip = new \ZipArchive;
       $destinationPath =  base_path('resources/lang/');
-      $upload_folder   =  base_path('uploads/');
+      $upload_folder   =  base_path('public/uploads/');
              
       if(isset($input['post_lang_file_upload']) || isset($input['post_lang_file_edit_option'])){
         $file   = Input::file('lang_file_upload');
@@ -501,7 +501,7 @@ class SettingsController extends Controller
 																										
                           $manageLanguage->lang_name              =    $input['inputLangName'];
                           $manageLanguage->lang_code              =    $folder_name;
-                          $manageLanguage->lang_sample_img        =    '/uploads/'.$folder_name. "_lang_sample_img.png";
+                          $manageLanguage->lang_sample_img        =    '/public/uploads/'.$folder_name. "_lang_sample_img.png";
                           $manageLanguage->status                 =    0;
                           $manageLanguage->default_lang           =    0;
 
