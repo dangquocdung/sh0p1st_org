@@ -459,7 +459,7 @@ class SettingsController extends Controller
       $input  = Input::all();
       $zip = new \ZipArchive;
       $destinationPath =  base_path('resources/lang/');
-      $upload_folder   =  base_path('public/uploads/');
+      $upload_folder   =  base_path('uploads/');
              
       if(isset($input['post_lang_file_upload']) || isset($input['post_lang_file_edit_option'])){
         $file   = Input::file('lang_file_upload');

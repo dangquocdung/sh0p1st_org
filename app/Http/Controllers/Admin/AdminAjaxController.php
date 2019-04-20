@@ -1249,7 +1249,7 @@ class AdminAjaxController extends Controller
         elseif($input['data']['track'] == 'manage_languages'){
 					$classGetFunction  =  new GetFunction();
           $destinationPath =  base_path('resources/lang/');
-          $upload_folder   =  base_path('public/uploads/');
+          $upload_folder   =  base_path('uploads/');
       
           $get_lang_data_by_id   =  ManageLanguage::where(['id' => $input['data']['id']])->get()->toArray();
           $get_data              =  array_shift($get_lang_data_by_id);
