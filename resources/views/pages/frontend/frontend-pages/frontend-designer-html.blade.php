@@ -219,7 +219,7 @@
         <br>
         @if( count(get_recent_uploaded_images_for_designer())>0 )
           @foreach(get_recent_uploaded_images_for_designer() as $data)
-            <div class="recent-images-items"><img src="{{ url('/') }}/public/uploads/{{ $data }}"></div>
+            <div class="recent-images-items"><img src="{{ url('/') }}/uploads/{{ $data }}"></div>
           @endforeach
           <div class="clear_both"></div>
         @else
@@ -275,7 +275,7 @@
   </div>
   <div id="designer-shadow-layer">
     <div class="designer-add-to-cart-loader">
-      <img src="http://localhost/shopist/public/images/ajax-loader.gif" id="img-load">
+      <img src="http://localhost/shopist/images/ajax-loader.gif" id="img-load">
     </div>
   </div>
 </div>

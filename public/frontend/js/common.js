@@ -80,11 +80,11 @@ $(document).ready(function(){
         {
           if(responseText.status === 'success')
           {
-            $('.profile-picture').find('img').attr('src', $('#hf_base_url').val() + '/public/uploads/'+ responseText.name);
+            $('.profile-picture').find('img').attr('src', $('#hf_base_url').val() + '/uploads/'+ responseText.name);
             $('.profile-picture').show();
             $('.no-profile-picture').hide();
             $('#frontendUserUploadProfilePicture').modal('hide');
-            $('#hf_frontend_profile_picture').val( '/public/uploads/'+ responseText.name );
+            $('#hf_frontend_profile_picture').val( '/uploads/'+ responseText.name );
 
             this.removeAllFiles();
           }
@@ -804,7 +804,7 @@ shopist_frontend.init =
         {
           for(var count = 0; count< images.length; count ++)
           {
-            html += '<img src= "'+ $('#hf_base_url').val() +'/public/uploads/'+ images[count] +'">';
+            html += '<img src= "'+ $('#hf_base_url').val() +'/uploads/'+ images[count] +'">';
           }
         }
         
@@ -1246,7 +1246,7 @@ shopist_frontend.ajaxCall =
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: frontendLocalizationString.wishlist_items_label,
                 closeOnConfirm: false,
-                imageUrl: $('#hf_base_url').val() + '/public/images/thumbs-up.jpg'
+                imageUrl: $('#hf_base_url').val() + '/images/thumbs-up.jpg'
               },
               function(){
                 location.href = $('#hf_base_url').val() + '/user/account/my-saved-items';
@@ -1297,7 +1297,7 @@ shopist_frontend.ajaxCall =
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: frontendLocalizationString.compare_items_label,
                 closeOnConfirm: false,
-                imageUrl: $('#hf_base_url').val() + '/public/images/thumbs-up.jpg'
+                imageUrl: $('#hf_base_url').val() + '/images/thumbs-up.jpg'
               },
               function(){
                 location.href = $('#hf_base_url').val() + '/product/comparison';
