@@ -156,12 +156,12 @@ return [
          */
         shopist\Providers\AppServiceProvider::class,
         shopist\Providers\AuthServiceProvider::class,
-        // shopist\Providers\BroadcastServiceProvider::class,
+        shopist\Providers\BroadcastServiceProvider::class,
         shopist\Providers\EventServiceProvider::class,
         shopist\Providers\RouteServiceProvider::class,
-        'Collective\Html\HtmlServiceProvider',
-        'Anhskohbo\NoCaptcha\NoCaptchaServiceProvider',
-        'Anam\Phpcart\CartServiceProvider',
+        Collective\Html\HtmlServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        Anam\Phpcart\CartServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Nexmo\Laravel\NexmoServiceProvider::class
 
@@ -217,7 +217,8 @@ return [
         'HTML'      => 'Collective\Html\HtmlFacade',
         'Cart'      => 'Anam\Phpcart\Facades\Cart',
         'Image'     => Intervention\Image\Facades\Image::class,
-        'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class
+        'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class,
+        'Cart' => Anam\Phpcart\Facades\Cart::class
 
     ],
 
