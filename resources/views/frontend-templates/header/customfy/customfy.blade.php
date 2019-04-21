@@ -77,7 +77,7 @@
               </li>
 
               <li class="mini-cart-content">
-                  {{-- @include('pages.ajax-pages.mini-cart-html') --}}
+                  @include('pages.ajax-pages.mini-cart-html')
               </li>
             </ul>
           </div>  
