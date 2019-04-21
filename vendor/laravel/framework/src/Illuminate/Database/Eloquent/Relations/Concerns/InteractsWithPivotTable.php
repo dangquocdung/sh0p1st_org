@@ -188,7 +188,7 @@ trait InteractsWithPivotTable
             $attributes = $this->addTimestampsToAttachment($attributes, true);
         }
 
-        $updated = $this->newPivotStatementForId($this->parseId($id))->update(
+        $updated = $this->newPivotStatementForId($id)->update(
             $this->castAttributes($attributes)
         );
 
@@ -474,11 +474,11 @@ trait InteractsWithPivotTable
     protected function parseIds($value)
     {
         if ($value instanceof Model) {
-            return [$value->{$this->relatedKey}];
+            return [$value->getKey()];
         }
 
         if ($value instanceof Collection) {
-            return $value->pluck($this->relatedKey)->all();
+            return $value->modelKeys();
         }
 
         if ($value instanceof BaseCollection) {
@@ -486,17 +486,6 @@ trait InteractsWithPivotTable
         }
 
         return (array) $value;
-    }
-
-    /**
-     * Get the ID from the given mixed value.
-     *
-     * @param  mixed  $value
-     * @return mixed
-     */
-    protected function parseId($value)
-    {
-        return $value instanceof Model ? $value->{$this->relatedKey} : $value;
     }
 
     /**

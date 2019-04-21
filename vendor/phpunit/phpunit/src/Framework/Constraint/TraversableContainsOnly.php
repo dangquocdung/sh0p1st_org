@@ -61,6 +61,8 @@ class TraversableContainsOnly extends Constraint
      *
      * @throws ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     *
+     * @return mixed
      */
     public function evaluate($other, $description = '', $returnResult = false)
     {
@@ -85,6 +87,8 @@ class TraversableContainsOnly extends Constraint
 
     /**
      * Returns a string representation of the constraint.
+     *
+     * @return string
      */
     public function toString(): string
     {

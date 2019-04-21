@@ -8,8 +8,6 @@
 
 namespace Nexmo\Client;
 
-use Nexmo\Client\Exception\Exception;
-
 class Signature
 {
     /**
@@ -30,7 +28,7 @@ class Signature
      * @param array $params
      * @param $secret
      */
-    public function __construct(array $params, $secret, $signatureMethod)
+    public function __construct(array $params, $secret)
     {
         $this->params = $params;
         $this->signed = $params;
@@ -53,25 +51,11 @@ class Signature
         //create base string
         $base = '&'.urldecode(http_build_query($signed));
 
-        $this->signed['sig'] = $this->sign($signatureMethod, $base, $secret);
-    }
+        //append the secret
+        $base .= $secret;
 
-    protected function sign($signatureMethod, $data, $secret) {
-       switch($signatureMethod) {
-            case 'md5hash':
-                // md5hash needs the secret appended
-                $data .= $secret;
-                return md5($data);
-                break;
-            case 'md5':
-            case 'sha1':
-            case 'sha256':
-            case 'sha512':
-                return strtoupper(hash_hmac($signatureMethod, $data, $secret));
-                break;
-            default:
-                throw new Exception('Unknown signature algorithm: '.$signatureMethod.'. Expected: md5hash, md5, sha1, sha256, or sha512');
-        }
+        //create hash
+        $this->signed['sig'] = md5($base);
     }
 
     /**
@@ -107,12 +91,7 @@ class Signature
     /**
      * Check that a signature (or set of parameters) is valid.
      *
-     * First instantiate a Signature object: this will drop any supplied
-     * signature parameter and calculate the correct one. Then call this
-     * method and supply the signature that came in with the request.
-     *
-     * @param array| string $signature The incoming sig parameter to check 
-     *      (or all incoming params)
+     * @param array| string $signature
      * @return bool
      * @throws \InvalidArgumentException
      */
@@ -126,7 +105,7 @@ class Signature
             throw new \InvalidArgumentException('signature must be string, or present in array or parameters');
         }
 
-        return strtolower($signature) == strtolower($this->signed['sig']);
+        return $signature == $this->signed['sig'];
     }
 
     /**

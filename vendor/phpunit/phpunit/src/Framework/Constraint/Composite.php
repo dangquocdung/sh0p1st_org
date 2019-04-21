@@ -18,6 +18,9 @@ abstract class Composite extends Constraint
      */
     private $innerConstraint;
 
+    /**
+     * @param Constraint $innerConstraint
+     */
     public function __construct(Constraint $innerConstraint)
     {
         parent::__construct();
@@ -41,6 +44,8 @@ abstract class Composite extends Constraint
      *
      * @throws ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     *
+     * @return mixed
      */
     public function evaluate($other, $description = '', $returnResult = false)
     {
@@ -57,6 +62,8 @@ abstract class Composite extends Constraint
 
     /**
      * Counts the number of constraint elements.
+     *
+     * @return int
      */
     public function count(): int
     {

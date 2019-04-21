@@ -12,6 +12,7 @@ namespace PHPUnit\Runner\Filter;
 use PHPUnit\Framework\TestSuite;
 use PHPUnit\Framework\WarningTestCase;
 use PHPUnit\Util\RegularExpression;
+use PHPUnit\Util\Test;
 use RecursiveFilterIterator;
 use RecursiveIterator;
 
@@ -26,22 +27,26 @@ class NameFilterIterator extends RecursiveFilterIterator
      * @var int
      */
     protected $filterMin;
-
     /**
      * @var int
      */
     protected $filterMax;
 
     /**
+     * @param RecursiveIterator $iterator
+     * @param string            $filter
+     *
      * @throws \Exception
      */
-    public function __construct(RecursiveIterator $iterator, string $filter)
+    public function __construct(RecursiveIterator $iterator, $filter)
     {
         parent::__construct($iterator);
-
         $this->setFilter($filter);
     }
 
+    /**
+     * @return bool
+     */
     public function accept(): bool
     {
         $test = $this->getInnerIterator()->current();
@@ -50,12 +55,12 @@ class NameFilterIterator extends RecursiveFilterIterator
             return true;
         }
 
-        $tmp = \PHPUnit\Util\Test::describe($test);
+        $tmp = Test::describe($test);
 
         if ($test instanceof WarningTestCase) {
             $name = $test->getMessage();
         } else {
-            if ($tmp[0] !== '') {
+            if ($tmp[0] != '') {
                 $name = \implode('::', $tmp);
             } else {
                 $name = $tmp[1];
@@ -69,13 +74,15 @@ class NameFilterIterator extends RecursiveFilterIterator
             $accepted = $set >= $this->filterMin && $set <= $this->filterMax;
         }
 
-        return (bool) $accepted;
+        return $accepted;
     }
 
     /**
+     * @param string $filter
+     *
      * @throws \Exception
      */
-    protected function setFilter(string $filter): void
+    protected function setFilter($filter): void
     {
         if (RegularExpression::safeMatch($filter, '') === false) {
             // Handles:
@@ -110,7 +117,7 @@ class NameFilterIterator extends RecursiveFilterIterator
 
             // Escape delimiters in regular expression. Do NOT use preg_quote,
             // to keep magic characters.
-            $filter = \sprintf('/%s/i', \str_replace(
+            $filter = \sprintf('/%s/', \str_replace(
                 '/',
                 '\\/',
                 $filter

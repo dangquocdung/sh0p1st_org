@@ -73,7 +73,7 @@ class Talk implements JsonSerializableInterface, ClientAwareInterface, \ArrayAcc
         }
 
         $request = new Request(
-            $this->getClient()->getApiUrl() . Collection::getCollectionPath() . '/' . $this->getId() . '/talk',
+            \Nexmo\Client::BASE_API . Collection::getCollectionPath() . '/' . $this->getId() . '/talk',
             'PUT',
             'php://temp',
             ['content-type' => 'application/json']
@@ -87,7 +87,7 @@ class Talk implements JsonSerializableInterface, ClientAwareInterface, \ArrayAcc
     public function delete()
     {
         $request = new Request(
-            $this->getClient()->getApiUrl() . Collection::getCollectionPath() . '/' . $this->getId() . '/talk',
+            \Nexmo\Client::BASE_API . Collection::getCollectionPath() . '/' . $this->getId() . '/talk',
             'DELETE'
         );
 

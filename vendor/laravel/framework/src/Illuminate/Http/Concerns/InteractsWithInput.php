@@ -94,7 +94,7 @@ trait InteractsWithInput
     /**
      * Determine if the request contains any of the given inputs.
      *
-     * @param  string|array  $keys
+     * @param  string|array  $key
      * @return bool
      */
     public function hasAny($keys)
@@ -129,25 +129,6 @@ trait InteractsWithInput
         }
 
         return true;
-    }
-
-    /**
-     * Determine if the request contains a non-empty value for any of the given inputs.
-     *
-     * @param  string|array  $keys
-     * @return bool
-     */
-    public function anyFilled($keys)
-    {
-        $keys = is_array($keys) ? $keys : func_get_args();
-
-        foreach ($keys as $key) {
-            if ($this->filled($key)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

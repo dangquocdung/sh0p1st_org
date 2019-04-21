@@ -41,11 +41,7 @@ abstract class Price implements EntityInterface, JsonSerializableInterface, Json
 
     public function getDefaultPrice()
     {
-        if (isset($this['default_price'])) {
-            return $this['default_price'];
-        }
-
-        return $this['mt'];
+        return $this['default_price'];
     }
 
     public function getCurrency()
@@ -75,42 +71,15 @@ abstract class Price implements EntityInterface, JsonSerializableInterface, Json
         $data = [];
         foreach ($json as $k => $v){
             $k = ltrim(strtolower(preg_replace('/[A-Z]([A-Z](?![a-z]))*/', '_$0', $k)), '_');
-
-            // PrefixPrice fixes
-            if ($k == 'country') {
-                $k = 'country_code';
-            }
-
-            if ($k == 'name') {
-                $data['country_display_name'] = $v;
-                $data['country_name'] = $v;
-            }
-
-            if ($k == 'prefix') {
-                $k = 'dialing_prefix';
-            }
-
             $data[$k] = $v;
         }
 
         // Create objects for all the nested networks too
         $networks = [];
-        if (isset($json['networks'])) {
-            foreach ($json['networks'] as $n){
-                if (isset($n['code'])) {
-                    $n['networkCode'] = $n['code'];
-                    unset ($n['code']);
-                }
-
-                if (isset($n['network'])) {
-                    $n['networkName'] = $n['network'];
-                    unset ($n['network']);
-                }
-
-                $network = new Network($n['networkCode'], $n['networkName']);
-                $network->jsonUnserialize($n);
-                $networks[$network->getCode()] = $network;
-            }
+        foreach ($json['networks'] as $n){
+            $network = new Network($n['networkCode'], $n['networkName']);
+            $network->jsonUnserialize($n);
+            $networks[$network->getCode()] = $network;
         }
 
         $data['networks'] = $networks;

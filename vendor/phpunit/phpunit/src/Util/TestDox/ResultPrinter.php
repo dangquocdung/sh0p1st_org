@@ -96,6 +96,8 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * @param resource $out
+     * @param array    $groups
+     * @param array    $excludeGroups
      *
      * @throws \PHPUnit\Framework\Exception
      */
@@ -123,6 +125,10 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * An error occurred.
+     *
+     * @param Test       $test
+     * @param \Throwable $t
+     * @param float      $time
      */
     public function addError(Test $test, \Throwable $t, float $time): void
     {
@@ -136,6 +142,10 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * A warning occurred.
+     *
+     * @param Test    $test
+     * @param Warning $e
+     * @param float   $time
      */
     public function addWarning(Test $test, Warning $e, float $time): void
     {
@@ -149,6 +159,10 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * A failure occurred.
+     *
+     * @param Test                 $test
+     * @param AssertionFailedError $e
+     * @param float                $time
      */
     public function addFailure(Test $test, AssertionFailedError $e, float $time): void
     {
@@ -162,6 +176,10 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * Incomplete test.
+     *
+     * @param Test       $test
+     * @param \Throwable $t
+     * @param float      $time
      */
     public function addIncompleteTest(Test $test, \Throwable $t, float $time): void
     {
@@ -175,6 +193,10 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * Risky test.
+     *
+     * @param Test       $test
+     * @param \Throwable $t
+     * @param float      $time
      */
     public function addRiskyTest(Test $test, \Throwable $t, float $time): void
     {
@@ -188,6 +210,10 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * Skipped test.
+     *
+     * @param Test       $test
+     * @param \Throwable $t
+     * @param float      $time
      */
     public function addSkippedTest(Test $test, \Throwable $t, float $time): void
     {
@@ -201,6 +227,8 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * A testsuite started.
+     *
+     * @param TestSuite $suite
      */
     public function startTestSuite(TestSuite $suite): void
     {
@@ -208,6 +236,8 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * A testsuite ended.
+     *
+     * @param TestSuite $suite
      */
     public function endTestSuite(TestSuite $suite): void
     {
@@ -215,6 +245,8 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * A test started.
+     *
+     * @param Test $test
      *
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
@@ -231,15 +263,32 @@ abstract class ResultPrinter extends Printer implements TestListener
                 $this->doEndClass();
             }
 
-            $this->currentTestClassPrettified = $this->prettifier->prettifyTestClass($class);
-            $this->testClass                  = $class;
-            $this->tests                      = [];
+            $classAnnotations = \PHPUnit\Util\Test::parseTestMethodAnnotations($class);
+
+            if (isset($classAnnotations['class']['testdox'][0])) {
+                $this->currentTestClassPrettified = $classAnnotations['class']['testdox'][0];
+            } else {
+                $this->currentTestClassPrettified = $this->prettifier->prettifyTestClass($class);
+            }
 
             $this->startClass($class);
+
+            $this->testClass = $class;
+            $this->tests     = [];
         }
 
         if ($test instanceof TestCase) {
-            $this->currentTestMethodPrettified = $this->prettifier->prettifyTestCase($test);
+            $annotations = $test->getAnnotations();
+
+            if (isset($annotations['method']['testdox'][0])) {
+                $this->currentTestMethodPrettified = $annotations['method']['testdox'][0];
+            } else {
+                $this->currentTestMethodPrettified = $this->prettifier->prettifyTestMethod($test->getName(false));
+            }
+
+            if ($test->usesDataProvider()) {
+                $this->currentTestMethodPrettified .= ' ' . $test->dataDescription();
+            }
         }
 
         $this->testStatus = BaseTestRunner::STATUS_PASSED;
@@ -247,6 +296,9 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * A test ended.
+     *
+     * @param Test  $test
+     * @param float $time
      */
     public function endTest(Test $test, float $time): void
     {
@@ -278,6 +330,8 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * Handler for 'start class' event.
+     *
+     * @param string $name
      */
     protected function startClass(string $name): void
     {
@@ -285,6 +339,9 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * Handler for 'on test' event.
+     *
+     * @param string $name
+     * @param bool   $success
      */
     protected function onTest($name, bool $success = true): void
     {
@@ -292,6 +349,8 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * Handler for 'end class' event.
+     *
+     * @param string $name
      */
     protected function endClass(string $name): void
     {

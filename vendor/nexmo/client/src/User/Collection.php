@@ -98,7 +98,7 @@ class Collection implements ClientAwareInterface, CollectionInterface, \ArrayAcc
         }
 
         $request = new Request(
-            $this->getClient()->getApiUrl() . $this->getCollectionPath()
+            \Nexmo\Client::BASE_API . $this->getCollectionPath()
             ,'POST',
             'php://temp',
             ['content-type' => 'application/json']

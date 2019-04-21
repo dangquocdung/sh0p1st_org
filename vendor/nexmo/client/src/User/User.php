@@ -54,7 +54,7 @@ class User implements EntityInterface, \JsonSerializable, JsonUnserializableInte
     public function get()
     {
         $request = new Request(
-            $this->getClient()->getApiUrl() . Collection::getCollectionPath() . '/' . $this->getId()
+            \Nexmo\Client::BASE_API . Collection::getCollectionPath() . '/' . $this->getId()
             ,'GET'
         );
 
@@ -72,7 +72,7 @@ class User implements EntityInterface, \JsonSerializable, JsonUnserializableInte
 
     public function getConversations() {
         $response = $this->getClient()->get(
-            $this->getClient()->getApiUrl() . Collection::getCollectionPath().'/'.$this->getId().'/conversations'
+            \Nexmo\Client::BASE_API . Collection::getCollectionPath().'/'.$this->getId().'/conversations'
         );
 
         if($response->getStatusCode() != '200'){

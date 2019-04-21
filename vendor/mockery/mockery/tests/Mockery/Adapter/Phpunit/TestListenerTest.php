@@ -21,21 +21,14 @@
 
 namespace tests\Mockery\Adapter\Phpunit;
 
-use Mockery\Adapter\Phpunit\MockeryTestCase;
+use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\TestResult;
 use Mockery\Adapter\Phpunit\TestListener;
+use PHPUnit\Runner\BaseTestRunner;
 
-if (class_exists('PHPUnit_Runner_Version') && version_compare(\PHPUnit_Runner_Version::id(), '6.0.0', '<')) {
-    class_alias('test\Mockery\Fixtures\EmptyTestCaseV5', 'tests\Mockery\Adapter\Phpunit\EmptyTestCase');
-} elseif (version_compare(\PHPUnit\Runner\Version::id(), '7.0.0', '<')) {
-    class_alias('test\Mockery\Fixtures\EmptyTestCaseV6', 'tests\Mockery\Adapter\Phpunit\EmptyTestCase');
-} else {
-    class_alias('test\Mockery\Fixtures\EmptyTestCaseV7', 'tests\Mockery\Adapter\Phpunit\EmptyTestCase');
-}
-
-class TestListenerTest extends MockeryTestCase
+class Mockery_Adapter_Phpunit_TestListenerTest extends TestCase
 {
-    protected function mockeryTestSetUp()
+    protected function setUp()
     {
         /**
          * Skip all tests here if PHPUnit is less than 6.0.0
@@ -45,7 +38,6 @@ class TestListenerTest extends MockeryTestCase
         } else {
             $ver = \PHPUnit_Runner_Version::series();
         }
-
         if (intval($ver) < 6) {
             $this->markTestSkipped('The TestListener is only supported with PHPUnit 6+.');
             return;
@@ -91,13 +83,12 @@ class TestListenerTest extends MockeryTestCase
         $mock->bar();
         \Mockery::close();
     }
+}
 
-    public function testMockeryIsAddedToBlacklist()
+class EmptyTestCase extends TestCase
+{
+    public function getStatus()
     {
-        $suite = \Mockery::mock(\PHPUnit\Framework\TestSuite::class);
-
-        $this->assertArrayNotHasKey(\Mockery::class, \PHPUnit\Util\Blacklist::$blacklistedClassNames);
-        $this->listener->startTestSuite($suite);
-        $this->assertSame(1, \PHPUnit\Util\Blacklist::$blacklistedClassNames[\Mockery::class]);
+        return BaseTestRunner::STATUS_PASSED;
     }
 }

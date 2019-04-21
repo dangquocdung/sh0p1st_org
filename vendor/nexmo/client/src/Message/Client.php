@@ -37,7 +37,7 @@ class Client implements ClientAwareInterface
         $params = $message->getRequestData(false);
         
         $request = new Request(
-            $this->getClient()->getRestUrl() . '/sms/json'
+            \Nexmo\Client::BASE_REST . '/sms/json'
             ,'POST',
             'php://temp',
             ['content-type' => 'application/json']
@@ -58,7 +58,7 @@ class Client implements ClientAwareInterface
         foreach($data['messages'] as $part){
             switch($part['status']){
                 case '0':
-                    break; //all okay
+                    continue; //all okay
                 case '1':
                     if(preg_match('#\[\s+(\d+)\s+\]#', $part['error-text'], $match)){
                         usleep($match[1] + 1);
@@ -79,37 +79,6 @@ class Client implements ClientAwareInterface
         }
 
         return $message;
-    }
-
-    public function sendShortcode($message) {
-        if(!($message instanceof Shortcode)){
-            $message = Shortcode::createMessageFromArray($message);
-        }
-
-        $params = $message->getRequestData();
-
-        $request = new Request(
-            $this->getClient()->getRestUrl() . '/sc/us/'.$message->getType().'/json'
-            ,'POST',
-            'php://temp',
-            ['content-type' => 'application/json']
-        );
-
-        $request->getBody()->write(json_encode($params));
-        $response = $this->client->send($request);
-
-        $body = json_decode($response->getBody(), true);
-
-        foreach ($body['messages'] as $m) {
-            if ($m['status'] != '0') {
-                $e = new Exception\Request($m['error-text'], $m['status']);
-                $e->setEntity($message);
-                throw $e;
-            }
-        }
-
-        return $body;
-
     }
 
     /**
@@ -133,7 +102,7 @@ class Client implements ClientAwareInterface
         }
 
         $request = new Request(
-            $this->getClient()->getRestUrl() . '/search/messages?' . http_build_query($params),
+            \Nexmo\Client::BASE_REST . '/search/messages?' . http_build_query($params),
             'GET',
             'php://temp',
             ['Accept' => 'application/json']
@@ -193,7 +162,7 @@ class Client implements ClientAwareInterface
         }
 
         $request = new Request(
-            $this->getClient()->getRestUrl() . '/search/message?' . http_build_query(['id' => $id]),
+            \Nexmo\Client::BASE_REST . '/search/message?' . http_build_query(['id' => $id]),
             'GET',
             'php://temp',
             ['Accept' => 'application/json']
@@ -248,7 +217,7 @@ class Client implements ClientAwareInterface
 
         $params = $query->getParams();
         $request = new Request(
-            $this->getClient()->getRestUrl() . '/search/rejections?' . http_build_query($params),
+            \Nexmo\Client::BASE_REST . '/search/messages?' . http_build_query($params),
             'GET',
             'php://temp',
             ['Accept' => 'application/json']

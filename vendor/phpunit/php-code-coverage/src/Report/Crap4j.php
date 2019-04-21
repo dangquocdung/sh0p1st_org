@@ -7,11 +7,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianBergmann\CodeCoverage\Report;
 
 use SebastianBergmann\CodeCoverage\CodeCoverage;
 use SebastianBergmann\CodeCoverage\Node\File;
-use SebastianBergmann\CodeCoverage\RuntimeException;
 
 final class Crap4j
 {
@@ -116,18 +116,11 @@ final class Crap4j
         $buffer = $document->saveXML();
 
         if ($target !== null) {
-            if (!$this->createDirectory(\dirname($target))) {
+            if (!@\mkdir(\dirname($target), 0777, true) && !\is_dir(\dirname($target))) {
                 throw new \RuntimeException(\sprintf('Directory "%s" was not created', \dirname($target)));
             }
 
-            if (@\file_put_contents($target, $buffer) === false) {
-                throw new RuntimeException(
-                    \sprintf(
-                        'Could not write to "%s',
-                        $target
-                    )
-                );
-            }
+            \file_put_contents($target, $buffer);
         }
 
         return $buffer;
@@ -137,6 +130,8 @@ final class Crap4j
      * @param float $crapValue
      * @param int   $cyclomaticComplexity
      * @param float $coveragePercent
+     *
+     * @return float
      */
     private function getCrapLoad($crapValue, $cyclomaticComplexity, $coveragePercent): float
     {
@@ -152,14 +147,11 @@ final class Crap4j
 
     /**
      * @param float $value
+     *
+     * @return float
      */
     private function roundValue($value): float
     {
         return \round($value, 2);
-    }
-
-    private function createDirectory(string $directory): bool
-    {
-        return !(!\is_dir($directory) && !@\mkdir($directory, 0777, true) && !\is_dir($directory));
     }
 }

@@ -73,6 +73,10 @@ class XmlResultPrinter extends Printer implements TestListener
 
     /**
      * An error occurred.
+     *
+     * @param Test       $test
+     * @param \Throwable $t
+     * @param float      $time
      */
     public function addError(Test $test, \Throwable $t, float $time): void
     {
@@ -81,6 +85,10 @@ class XmlResultPrinter extends Printer implements TestListener
 
     /**
      * A warning occurred.
+     *
+     * @param Test    $test
+     * @param Warning $e
+     * @param float   $time
      */
     public function addWarning(Test $test, Warning $e, float $time): void
     {
@@ -88,6 +96,10 @@ class XmlResultPrinter extends Printer implements TestListener
 
     /**
      * A failure occurred.
+     *
+     * @param Test                 $test
+     * @param AssertionFailedError $e
+     * @param float                $time
      */
     public function addFailure(Test $test, AssertionFailedError $e, float $time): void
     {
@@ -96,6 +108,10 @@ class XmlResultPrinter extends Printer implements TestListener
 
     /**
      * Incomplete test.
+     *
+     * @param Test       $test
+     * @param \Throwable $t
+     * @param float      $time
      */
     public function addIncompleteTest(Test $test, \Throwable $t, float $time): void
     {
@@ -103,6 +119,10 @@ class XmlResultPrinter extends Printer implements TestListener
 
     /**
      * Risky test.
+     *
+     * @param Test       $test
+     * @param \Throwable $t
+     * @param float      $time
      */
     public function addRiskyTest(Test $test, \Throwable $t, float $time): void
     {
@@ -110,6 +130,10 @@ class XmlResultPrinter extends Printer implements TestListener
 
     /**
      * Skipped test.
+     *
+     * @param Test       $test
+     * @param \Throwable $t
+     * @param float      $time
      */
     public function addSkippedTest(Test $test, \Throwable $t, float $time): void
     {
@@ -117,6 +141,8 @@ class XmlResultPrinter extends Printer implements TestListener
 
     /**
      * A test suite started.
+     *
+     * @param TestSuite $suite
      */
     public function startTestSuite(TestSuite $suite): void
     {
@@ -124,6 +150,8 @@ class XmlResultPrinter extends Printer implements TestListener
 
     /**
      * A test suite ended.
+     *
+     * @param TestSuite $suite
      */
     public function endTestSuite(TestSuite $suite): void
     {
@@ -131,6 +159,8 @@ class XmlResultPrinter extends Printer implements TestListener
 
     /**
      * A test started.
+     *
+     * @param Test $test
      */
     public function startTest(Test $test): void
     {
@@ -139,6 +169,9 @@ class XmlResultPrinter extends Printer implements TestListener
 
     /**
      * A test ended.
+     *
+     * @param Test  $test
+     * @param float $time
      *
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
@@ -162,7 +195,7 @@ class XmlResultPrinter extends Printer implements TestListener
         $node->setAttribute('className', \get_class($test));
         $node->setAttribute('methodName', $test->getName());
         $node->setAttribute('prettifiedClassName', $this->prettifier->prettifyTestClass(\get_class($test)));
-        $node->setAttribute('prettifiedMethodName', $this->prettifier->prettifyTestCase($test));
+        $node->setAttribute('prettifiedMethodName', $this->prettifier->prettifyTestMethod($test->getName()));
         $node->setAttribute('status', $test->getStatus());
         $node->setAttribute('time', $time);
         $node->setAttribute('size', $test->getSize());
@@ -170,13 +203,13 @@ class XmlResultPrinter extends Printer implements TestListener
 
         $inlineAnnotations = \PHPUnit\Util\Test::getInlineAnnotations(\get_class($test), $test->getName());
 
-        if (isset($inlineAnnotations['given'], $inlineAnnotations['when'], $inlineAnnotations['then'])) {
+        if (isset($inlineAnnotations['given']) && isset($inlineAnnotations['when']) && isset($inlineAnnotations['then'])) {
             $node->setAttribute('given', $inlineAnnotations['given']['value']);
-            $node->setAttribute('givenStartLine', (string) $inlineAnnotations['given']['line']);
+            $node->setAttribute('givenStartLine', $inlineAnnotations['given']['line']);
             $node->setAttribute('when', $inlineAnnotations['when']['value']);
-            $node->setAttribute('whenStartLine', (string) $inlineAnnotations['when']['line']);
+            $node->setAttribute('whenStartLine', $inlineAnnotations['when']['line']);
             $node->setAttribute('then', $inlineAnnotations['then']['value']);
-            $node->setAttribute('thenStartLine', (string) $inlineAnnotations['then']['line']);
+            $node->setAttribute('thenStartLine', $inlineAnnotations['then']['line']);
         }
 
         if ($this->exception !== null) {

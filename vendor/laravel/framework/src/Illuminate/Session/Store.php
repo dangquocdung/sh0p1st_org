@@ -475,9 +475,7 @@ class Store implements Session
      */
     public function regenerate($destroy = false)
     {
-        return tap($this->migrate($destroy), function () {
-            $this->regenerateToken();
-        });
+        return $this->migrate($destroy);
     }
 
     /**

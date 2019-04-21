@@ -50,10 +50,6 @@ class Network implements EntityInterface, JsonSerializableInterface, JsonUnseria
         return $this['price'];
     }
 
-    public function getPrefixPrice() {
-        return $this['mt_price'];
-    }
-
     public function getCurrency()
     {
         return $this['currency'];

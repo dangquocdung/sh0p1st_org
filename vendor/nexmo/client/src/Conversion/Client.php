@@ -33,7 +33,7 @@ class Client implements ClientAwareInterface
         }
 
         $response = $this->client->postUrlEncoded(
-            $this->getClient()->getApiUrl() . '/conversions/'.$type.'?'.http_build_query($params),
+            \Nexmo\Client::BASE_API . '/conversions/'.$type.'?'.http_build_query($params),
             []
         );
 

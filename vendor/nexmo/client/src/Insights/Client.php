@@ -80,7 +80,7 @@ class Client implements ClientAwareInterface
         ] + $additionalParams);
 
         $request = new Request(
-            $this->getClient()->getApiUrl(). $path.'?'.$queryString,
+            \Nexmo\Client::BASE_API . $path.'?'.$queryString,
             'GET',
             'php://temp',
             [
