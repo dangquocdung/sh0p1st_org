@@ -6,11 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Anam\\Phpcart\\Cart' => $vendorDir . '/anam/phpcart/src/Cart.php',
-    'Anam\\Phpcart\\CartInterface' => $vendorDir . '/anam/phpcart/src/CartInterface.php',
-    'Anam\\Phpcart\\CartServiceProvider' => $vendorDir . '/anam/phpcart/src/CartServiceProvider.php',
-    'Anam\\Phpcart\\Collection' => $vendorDir . '/anam/phpcart/src/Collection.php',
-    'Anam\\Phpcart\\Facades\\Cart' => $vendorDir . '/anam/phpcart/src/Facades/Cart.php',
+    'Anam\\Phpcart\\Cart' => $vendorDir . '/anam/lara-phpcart/src/Cart.php',
+    'Anam\\Phpcart\\CartInterface' => $vendorDir . '/anam/lara-phpcart/src/CartInterface.php',
+    'Anam\\Phpcart\\CartServiceProvider' => $vendorDir . '/anam/lara-phpcart/src/CartServiceProvider.php',
+    'Anam\\Phpcart\\Collection' => $vendorDir . '/anam/lara-phpcart/src/Collection.php',
+    'Anam\\Phpcart\\Facades\\Cart' => $vendorDir . '/anam/lara-phpcart/src/Facades/Cart.php',
     'Anhskohbo\\NoCaptcha\\Facades\\NoCaptcha' => $vendorDir . '/anhskohbo/no-captcha/src/Facades/NoCaptcha.php',
     'Anhskohbo\\NoCaptcha\\NoCaptcha' => $vendorDir . '/anhskohbo/no-captcha/src/NoCaptcha.php',
     'Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider' => $vendorDir . '/anhskohbo/no-captcha/src/NoCaptchaServiceProvider.php',

@@ -2,9 +2,8 @@
 
 namespace Anam\Phpcart\Tests;
 
-use Exception;
 use Anam\Phpcart\Collection;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class CollectionTest extends TestCase
 {
@@ -19,7 +18,7 @@ class CollectionTest extends TestCase
             'id' => 123,
             'name' => 'T-shirt',
             'price' => 50,
-            'quantity' => 2
+            'quantity' => 2,
         ];
     }
 
@@ -32,12 +31,12 @@ class CollectionTest extends TestCase
                 'id' => 125,
                 'name' => 'shirt',
                 'price' => 500,
-                'quantity' => 1
-            ], 
-            $this->item
+                'quantity' => 1,
+            ],
+            $this->item,
         ]);
 
-        $this->assertEquals($this->item, $collection->getItems()[1]);        
+        $this->assertEquals($this->item, $collection->getItems()[1]);
     }
 
     public function testFindItem()
@@ -49,12 +48,12 @@ class CollectionTest extends TestCase
                 'id' => 125,
                 'name' => 'shirt',
                 'price' => 500,
-                'quantity' => 1
-            ], 
-            $this->item
+                'quantity' => 1,
+            ],
+            $this->item,
         ]);
 
-        $this->assertEquals($this->item, $collection->findItem(1));        
+        $this->assertEquals($this->item, $collection->findItem(1));
     }
 
     public function testAnItemIsExistInCollection()
@@ -66,12 +65,12 @@ class CollectionTest extends TestCase
                 'id' => 125,
                 'name' => 'shirt',
                 'price' => 500,
-                'quantity' => 1
-            ], 
-            123 => $this->item
+                'quantity' => 1,
+            ],
+            123 => $this->item,
         ]);
 
-        $this->assertTrue($collection->has($this->item));        
+        $this->assertTrue($collection->has($this->item));
     }
 
     public function testFindAnItemInCollection()
@@ -83,12 +82,12 @@ class CollectionTest extends TestCase
                 'id' => 125,
                 'name' => 'shirt',
                 'price' => 500,
-                'quantity' => 1
-            ], 
-            123 => $this->item
+                'quantity' => 1,
+            ],
+            123 => $this->item,
         ]);
 
-        $this->assertEquals($this->item, $collection->findItem($this->item['id']));        
+        $this->assertEquals($this->item, $collection->findItem($this->item['id']));
     }
 
     public function testItemNotExistInCollection()
@@ -100,12 +99,12 @@ class CollectionTest extends TestCase
                 'id' => 125,
                 'name' => 'shirt',
                 'price' => 500,
-                'quantity' => 1
-            ], 
-            123 => $this->item
+                'quantity' => 1,
+            ],
+            123 => $this->item,
         ]);
 
-        $this->assertNull($collection->findItem(404));        
+        $this->assertNull($collection->findItem(404));
     }
 
     public function testInsertAnItemInCollection()
@@ -116,10 +115,10 @@ class CollectionTest extends TestCase
             'id' => 125,
             'name' => 'shirt',
             'price' => 500,
-            'quantity' => 1
+            'quantity' => 1,
         ]);
 
-        $this->assertEquals(125, $collection->findItem(125)->id);        
+        $this->assertEquals(125, $collection->findItem(125)->id);
     }
 
     /**
@@ -131,7 +130,7 @@ class CollectionTest extends TestCase
 
         $collection->validateItem([
             'id' => 125,
-            'quantity' => 1
-        ]);    
+            'quantity' => 1,
+        ]);
     }
 }

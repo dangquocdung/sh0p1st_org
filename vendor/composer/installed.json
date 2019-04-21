@@ -1,66 +1,5 @@
 [
     {
-        "name": "anam/phpcart",
-        "version": "v1.1.0",
-        "version_normalized": "1.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/anam-hossain/phpcart.git",
-            "reference": "aac345aa0e9b4ff3537ed25362693d0c4a0612aa"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/anam-hossain/phpcart/zipball/aac345aa0e9b4ff3537ed25362693d0c4a0612aa",
-            "reference": "aac345aa0e9b4ff3537ed25362693d0c4a0612aa",
-            "shasum": ""
-        },
-        "require": {
-            "illuminate/support": "~5.0",
-            "php": ">=5.4.0",
-            "symfony/http-foundation": "~3.0|~4.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^6.4"
-        },
-        "time": "2019-02-25 10:40:30",
-        "type": "library",
-        "extra": {
-            "laravel": {
-                "providers": [
-                    "Anam\\Phpcart\\CartServiceProvider"
-                ],
-                "aliases": {
-                    "Cart": "Anam\\Phpcart\\Facades\\Cart"
-                }
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Anam\\Phpcart\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Anam hossain",
-                "email": "enam33@gmail.com"
-            }
-        ],
-        "description": "Simple framework agnostic shopping cart",
-        "homepage": "https://github.com/anam-hossain/phpcart",
-        "keywords": [
-            "Laravel cart",
-            "Laravel shopping cart",
-            "cart",
-            "php cart",
-            "shopping cart"
-        ]
-    },
-    {
         "name": "anhskohbo/no-captcha",
         "version": "3.0.4",
         "version_normalized": "3.0.4.0",
@@ -5500,6 +5439,62 @@
             "http",
             "psr",
             "psr-7"
+        ]
+    },
+    {
+        "name": "anam/lara-phpcart",
+        "version": "v1.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/anam-hossain/lara-phpcart.git",
+            "reference": "0e5e99eb37a4bbf37a6361ea99fe50ae026721fd"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/anam-hossain/lara-phpcart/zipball/0e5e99eb37a4bbf37a6361ea99fe50ae026721fd",
+            "reference": "0e5e99eb37a4bbf37a6361ea99fe50ae026721fd",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2019-02-26 01:00:49",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Anam\\Phpcart\\CartServiceProvider"
+                ],
+                "aliases": {
+                    "Cart": "Anam\\Phpcart\\Facades\\Cart"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Anam\\Phpcart\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Anam hossain",
+                "email": "enam33@gmail.com"
+            }
+        ],
+        "description": "Laravel php shopping cart",
+        "homepage": "https://github.com/anam-hossain/lara-phpcart",
+        "keywords": [
+            "Laravel cart",
+            "Laravel php cart",
+            "Laravel shopping cart",
+            "cart",
+            "shopping cart"
         ]
     }
 ]

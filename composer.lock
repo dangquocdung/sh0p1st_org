@@ -4,30 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2275e95a79bc7ac2847337b20ba8573f",
-    "content-hash": "5369b60921cba83373f23c004bec9c96",
+    "hash": "056afdab174340d646901dc24cece57e",
+    "content-hash": "e95994cee5a40f003cbc6ca398caaf62",
     "packages": [
         {
-            "name": "anam/phpcart",
-            "version": "v1.1.0",
+            "name": "anam/lara-phpcart",
+            "version": "v1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/anam-hossain/phpcart.git",
-                "reference": "aac345aa0e9b4ff3537ed25362693d0c4a0612aa"
+                "url": "https://github.com/anam-hossain/lara-phpcart.git",
+                "reference": "0e5e99eb37a4bbf37a6361ea99fe50ae026721fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/anam-hossain/phpcart/zipball/aac345aa0e9b4ff3537ed25362693d0c4a0612aa",
-                "reference": "aac345aa0e9b4ff3537ed25362693d0c4a0612aa",
+                "url": "https://api.github.com/repos/anam-hossain/lara-phpcart/zipball/0e5e99eb37a4bbf37a6361ea99fe50ae026721fd",
+                "reference": "0e5e99eb37a4bbf37a6361ea99fe50ae026721fd",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "~5.0",
-                "php": ">=5.4.0",
-                "symfony/http-foundation": "~3.0|~4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.4"
+                "php": ">=5.4.0"
             },
             "type": "library",
             "extra": {
@@ -55,16 +50,16 @@
                     "email": "enam33@gmail.com"
                 }
             ],
-            "description": "Simple framework agnostic shopping cart",
-            "homepage": "https://github.com/anam-hossain/phpcart",
+            "description": "Laravel php shopping cart",
+            "homepage": "https://github.com/anam-hossain/lara-phpcart",
             "keywords": [
                 "Laravel cart",
+                "Laravel php cart",
                 "Laravel shopping cart",
                 "cart",
-                "php cart",
                 "shopping cart"
             ],
-            "time": "2019-02-25 10:40:30"
+            "time": "2019-02-26 01:00:49"
         },
         {
             "name": "anhskohbo/no-captcha",

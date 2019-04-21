@@ -7,7 +7,7 @@ class CartServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->bind('cart', function() {
+        $this->app->bind('cart', function () {
             return new \Anam\Phpcart\Cart;
         });
     }

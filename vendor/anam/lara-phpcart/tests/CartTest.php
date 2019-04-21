@@ -2,11 +2,8 @@
 
 namespace Anam\Phpcart\Tests;
 
-use Exception;
-use InvalidArgumentException;
 use Anam\Phpcart\Cart;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
+use Tests\TestCase;
 
 class CartTest extends TestCase
 {
@@ -28,7 +25,7 @@ class CartTest extends TestCase
 
         $cart = $cart->named('test2');
 
-         $this->assertEquals('test2_cart', $cart->getCart(), 'Set cart name using named() method');        
+        $this->assertEquals('test2_cart', $cart->getCart(), 'Set cart name using named() method');
     }
 
     public function testInvalidCartName()
@@ -52,29 +49,29 @@ class CartTest extends TestCase
 
     public function testAddCartItem()
     {
-        $cart = new Cart('test', new MockArraySessionStorage());
+        $cart = new Cart('test');
 
         $item = [
             'id' => 123,
             'name' => 'T-shirt',
             'price' => 50,
-            'quantity' => 2
+            'quantity' => 2,
         ];
 
         $cartItems = $cart->add($item);
 
-        $this->assertEquals($item, (array) $cartItems->first());        
+        $this->assertEquals($item, (array) $cartItems->first());
     }
 
     public function testUpdateCartItem()
     {
-        $cart = new Cart('test', new MockArraySessionStorage());
+        $cart = new Cart('test');
 
         $item = [
             'id' => 123,
             'name' => 'T-shirt',
             'price' => 50,
-            'quantity' => 2
+            'quantity' => 2,
         ];
 
         $cartItems = $cart->add($item);
@@ -83,18 +80,18 @@ class CartTest extends TestCase
 
         $this->assertNotEquals($item, (array) $cartItems->first());
 
-        $this->assertEquals(array_merge($item, ['name' => 'Shirt']), (array) $cartItems->first());        
+        $this->assertEquals(array_merge($item, ['name' => 'Shirt']), (array) $cartItems->first());
     }
 
     public function testUpdateQuantity()
     {
-        $cart = new Cart('test', new MockArraySessionStorage());
+        $cart = new Cart('test');
 
         $item = [
             'id' => 123,
             'name' => 'T-shirt',
             'price' => 50,
-            'quantity' => 2
+            'quantity' => 2,
         ];
 
         $cartItems = $cart->add($item);
@@ -106,13 +103,13 @@ class CartTest extends TestCase
 
     public function testUpdatePrice()
     {
-        $cart = new Cart('test', new MockArraySessionStorage());
+        $cart = new Cart('test');
 
         $item = [
             'id' => 123,
             'name' => 'T-shirt',
             'price' => 50,
-            'quantity' => 2
+            'quantity' => 2,
         ];
 
         $cartItems = $cart->add($item);
@@ -124,13 +121,13 @@ class CartTest extends TestCase
 
     public function testRemoveItemFromCart()
     {
-        $cart = new Cart('test', new MockArraySessionStorage());
+        $cart = new Cart('test');
 
         $item = [
             'id' => 123,
             'name' => 'T-shirt',
             'price' => 50,
-            'quantity' => 2
+            'quantity' => 2,
         ];
 
         $cartItems = $cart->add($item);
@@ -142,13 +139,13 @@ class CartTest extends TestCase
 
     public function testGetItems()
     {
-        $cart = new Cart('test', new MockArraySessionStorage());
+        $cart = new Cart('test');
 
         $item = [
             'id' => 123,
             'name' => 'T-shirt',
             'price' => 50,
-            'quantity' => 2
+            'quantity' => 2,
         ];
 
         $cart->add($item);
@@ -157,7 +154,7 @@ class CartTest extends TestCase
             'id' => 124,
             'name' => 'Shoes',
             'price' => 500,
-            'quantity' => 1
+            'quantity' => 1,
         ]);
 
         $this->assertEquals(2, $cart->items()->count());
@@ -166,13 +163,13 @@ class CartTest extends TestCase
 
     public function testGetItemById()
     {
-        $cart = new Cart('test', new MockArraySessionStorage());
+        $cart = new Cart('test');
 
         $item = [
             'id' => 123,
             'name' => 'T-shirt',
             'price' => 50,
-            'quantity' => 2
+            'quantity' => 2,
         ];
 
         $cart->add($item);
@@ -181,7 +178,7 @@ class CartTest extends TestCase
             'id' => 124,
             'name' => 'Shoes',
             'price' => 500,
-            'quantity' => 1
+            'quantity' => 1,
         ]);
 
         $this->assertEquals($item, (array) $cart->get(123));
@@ -189,13 +186,13 @@ class CartTest extends TestCase
 
     public function testCartHasItem()
     {
-        $cart = new Cart('test', new MockArraySessionStorage());
+        $cart = new Cart('test');
 
         $item = [
             'id' => 123,
             'name' => 'T-shirt',
             'price' => 50,
-            'quantity' => 2
+            'quantity' => 2,
         ];
 
         $cart->add($item);
@@ -205,13 +202,13 @@ class CartTest extends TestCase
 
     public function testCountUniqueItems()
     {
-        $cart = new Cart('test', new MockArraySessionStorage());
+        $cart = new Cart('test');
 
         $item = [
             'id' => 123,
             'name' => 'T-shirt',
             'price' => 50,
-            'quantity' => 2
+            'quantity' => 2,
         ];
 
         $cart->add($item);
@@ -220,7 +217,7 @@ class CartTest extends TestCase
             'id' => 124,
             'name' => 'Shoes',
             'price' => 500,
-            'quantity' => 100
+            'quantity' => 100,
         ]);
 
         $this->assertEquals(2, $cart->count());
@@ -228,13 +225,13 @@ class CartTest extends TestCase
 
     public function testTotalQuantity()
     {
-        $cart = new Cart('test', new MockArraySessionStorage());
+        $cart = new Cart('test');
 
         $item = [
             'id' => 123,
             'name' => 'T-shirt',
             'price' => 50,
-            'quantity' => 2
+            'quantity' => 2,
         ];
 
         $cart->add($item);
@@ -243,7 +240,7 @@ class CartTest extends TestCase
             'id' => 124,
             'name' => 'Shoes',
             'price' => 500,
-            'quantity' => 100
+            'quantity' => 100,
         ]);
 
         $this->assertEquals(102, $cart->totalQuantity());
@@ -251,13 +248,13 @@ class CartTest extends TestCase
 
     public function testGetTotalPrice()
     {
-        $cart = new Cart('test', new MockArraySessionStorage());
+        $cart = new Cart('test');
 
         $item = [
             'id' => 123,
             'name' => 'T-shirt',
             'price' => 50,
-            'quantity' => 2
+            'quantity' => 2,
         ];
 
         $cart->add($item);
@@ -266,7 +263,7 @@ class CartTest extends TestCase
             'id' => 124,
             'name' => 'Shoes',
             'price' => 500,
-            'quantity' => 100
+            'quantity' => 100,
         ]);
 
         $this->assertEquals(50100, $cart->getTotal());
@@ -274,13 +271,13 @@ class CartTest extends TestCase
 
     public function testClearCart()
     {
-        $cart = new Cart('test', new MockArraySessionStorage());
+        $cart = new Cart('test');
 
         $item = [
             'id' => 123,
             'name' => 'T-shirt',
             'price' => 50,
-            'quantity' => 2
+            'quantity' => 2,
         ];
 
         $cart->add($item);

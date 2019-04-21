@@ -1,8 +1,8 @@
-<?php 
+<?php
 namespace Anam\Phpcart;
 
-use Illuminate\Support\Collection as IlluminateCollection;
 use Exception;
+use Illuminate\Support\Collection as IlluminateCollection;
 
 class Collection extends IlluminateCollection
 {
@@ -22,7 +22,7 @@ class Collection extends IlluminateCollection
         'id',
         'name',
         'price',
-        'quantity'
+        'quantity',
     ];
 
     public function setItems(array $items)
@@ -42,7 +42,7 @@ class Collection extends IlluminateCollection
      */
     public function findItem($key)
     {
-        return isset($this->items[$key])? $this->items[$key] : null;
+        return isset($this->items[$key]) ? $this->items[$key] : null;
     }
 
     public function has($item)
@@ -87,7 +87,7 @@ class Collection extends IlluminateCollection
             throw new Exception('Quantity can not be less than 1');
         }
 
-        if (! is_numeric($item['price'])) {
+        if (!is_numeric($item['price'])) {
             throw new Exception('Price must be a numeric number');
         }
     }
